@@ -33,10 +33,10 @@
             var day = 1;
             var month = 1;
 
-            for (var i = 0; i < 366; i++) {
+            for (var i = 1; i <= 366; i++) {
                 var button = document.createElement("button");
                 button.className = "birthday-button";
-                button.style.backgroundColor = getRandomColor();
+                button.style.backgroundColor = getRandomColor(i);
 
                 var dateLabel = document.createElement("span");
                 dateLabel.className = "date-label";
@@ -55,13 +55,12 @@
             }
         }
 
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
+        function getRandomColor(i) {
+            if (i === 1) {
+                return "#FFFFE5"; // 1/1の色
             }
-            return color;
+            // 他の日付に対応する色を設定するためのコードをここに追加してください
+            return "#FFFFFF"; // デフォルトの色
         }
     </script>
 </body>
