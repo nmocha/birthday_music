@@ -3,26 +3,39 @@
 <head>
     <title>Birthday & Book Color</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        .birthday-button {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 50%;
+            margin: 5px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
     <h1>Birthday & Book Color</h1>
-    <p>Select your birthday:</p>
-    <input type="date" id="birthday" name="birthday">
-    <button onclick="displayColorAndBook()">Submit</button>
-    <div id="result"></div>
+    <div id="birthday-buttons"></div>
 
     <script>
-        function displayColorAndBook() {
-            var birthday = document.getElementById("birthday").value;
-            var resultDiv = document.getElementById("result");
+        window.onload = function() {
+            var container = document.getElementById("birthday-buttons");
 
-            // For simplicity, we just display the selected date
-            // In a real application, you would map the date to a color and a book
-            resultDiv.innerHTML = "Your birthday is: " + birthday;
+            for (var i = 0; i < 366; i++) {
+                var button = document.createElement("button");
+                button.className = "birthday-button";
+                button.style.backgroundColor = getRandomColor();
+                container.appendChild(button);
+            }
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
     </script>
 </body>
