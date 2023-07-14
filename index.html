@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Birthday & Book Color</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Birthday & Book Color</h1>
+    <p>Select your birthday:</p>
+    <input type="date" id="birthday" name="birthday">
+    <button onclick="displayColorAndBook()">Submit</button>
+    <div id="result"></div>
+
+    <script>
+        function displayColorAndBook() {
+            var birthday = document.getElementById("birthday").value;
+            var resultDiv = document.getElementById("result");
+
+            // For simplicity, we just display the selected date
+            // In a real application, you would map the date to a color and a book
+            resultDiv.innerHTML = "Your birthday is: " + birthday;
+        }
+    </script>
+</body>
+</html>
