@@ -51,6 +51,12 @@
                 dateLabel.textContent = month + "/" + day;
                 button.appendChild(dateLabel);
 
+                if (i === 1) {  // 1/1のボタンの場合
+                    button.addEventListener("click", function() {
+                        window.open("https://nmocha.github.io/birthday_book/0101/");  // 新しいページを開く
+                    });
+                }
+                
                 container.appendChild(button);
 
                 day++;
