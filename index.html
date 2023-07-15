@@ -19,7 +19,15 @@
             margin: 5px;
             display: inline-block;
             position: relative;
+            opacity: 1; /* ボタンの不透明度を設定 (1は完全に不透明) */
+            transition: opacity 0.3s; /* 不透明度が変化する速度を設定 */
         }
+
+        /* ボタンがアクティブ（クリックされた）状態のときのスタイルを設定 */
+        .birthday-button:active {
+            opacity: 0.5; /* ボタンの不透明度を半透明に設定 */
+        }
+        
         .date-label {
             position: absolute;
             top: 50%;
