@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand” rel="stylesheet">
     <title>YOUR Birthday & Music Color</title>
-    <link rel="icon" type="ico" href="birthday_music.ico" />
     <style>
         body {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+            /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
         }
         h1 {
             text-align: center;
             color: #696868;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+            /* font-family: 'Quicksand', sans-serif; */
+            /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
         }
         .birthday-button {
-            width: 60px;
-            height: 60px;
+            width: 75px;
+            height: 75px;
             border: none;
             border-radius: 50%;
             margin: 5px;
@@ -24,13 +27,20 @@
             transition: opacity 0.3s; /* 不透明度が変化する速度を設定 */
         }
         
-        /* ボタンにマウスがホバー（上にある）状態のときのスタイルを設定 */
         .birthday-button:hover {
-            opacity: 0.7; /* ボタンの不透明度を半透明に設定 */
+            opacity: 0.7;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+            -webkit-transform: translate(0, 2px);
+            transform: translate(0, 2px);
+            -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
         }
 
         /* ボタンがアクティブ（クリックされた）状態のときのスタイルを設定 */
         .birthday-button:active {
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
             opacity: 0.5; /* ボタンの不透明度を半透明に設定 */
         }
         
@@ -41,7 +51,25 @@
             transform: translate(-50%, -50%);
             color: white;
             font-size: 12px;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+            /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+        }
+
+        /* 新たに追加したラベルボタンのスタイル */
+        .label-button {
+            width: 75px;
+            height: 75px;
+            border: none;
+            border-radius: 50%;
+            margin: 5px;
+            display: inline-block;
+            position: relative;
+            background-color: #ffffff;
+            color: #696868;
+            text-align: center;
+            line-height: 75px;
+            font-size: 20px;
+            font-family: "SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
         }
     </style>
 </head>
@@ -55,8 +83,17 @@
 
             var day = 1;
             var month = 1;
+            var monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
             for (var i = 1; i <= 366; i++) {
+                // 月の1日の場合、月のラベルボタンを追加
+                if (day === 1) {
+                    var labelButton = document.createElement("button");
+                    labelButton.className = "label-button";
+                    labelButton.textContent = monthLabels[month - 1];
+                    container.appendChild(labelButton);
+                }
+
                 var button = document.createElement("button");
                 button.className = "birthday-button";
                 button.style.backgroundColor = getRandomColor(i);
