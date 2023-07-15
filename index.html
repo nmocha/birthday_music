@@ -43,15 +43,25 @@
             var month = 1;
 
             for (var i = 1; i <= 366; i++) {
-                var button = document.createElement("a");
+                var button = document.createElement("button");
                 button.className = "birthday-button";
                 button.style.backgroundColor = getRandomColor(i);
-                button.href = month.toString().padStart(2, '0') + day.toString().padStart(2, '0') + ".html";
 
                 var dateLabel = document.createElement("span");
                 dateLabel.className = "date-label";
                 dateLabel.textContent = month + "/" + day;
                 button.appendChild(dateLabel);
+
+                // 日付を2桁にフォーマット
+                var formattedMonth = ("0" + month).slice(-2);
+                var formattedDay = ("0" + day).slice(-2);
+
+                // ボタンがクリックされたときに新しいページを開く
+                button.addEventListener("click", (function(month, day) {
+                    return function() {
+                        window.open("html/" + month + day + ".html", "_self");
+                    };
+                })(formattedMonth, formattedDay));
 
                 container.appendChild(button);
 
@@ -64,7 +74,7 @@
                 }
             }
         }
-
+        
         function getRandomColor(i) {
             if (i === 1) {
                 return "#FFFFE5"; // 01/01の色
