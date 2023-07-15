@@ -37,7 +37,13 @@
 
         /* ボタンにマウスがホバー（上にある）状態のときのスタイルを設定 */
         .home-button:hover {
-            opacity: 0.7; /* ボタンの不透明度を半透明に設定 */
+            opacity: 0.7;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+            -webkit-transform: translate(0, 2px);
+            transform: translate(0, 2px);
+            -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
         }
 
         /* ボタンがアクティブ（クリックされた）状態のときのスタイルを設定 */
