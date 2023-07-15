@@ -42,21 +42,16 @@
             var month = 1;
 
             for (var i = 1; i <= 366; i++) {
-                var button = document.createElement("button");
+                var button = document.createElement("a");
                 button.className = "birthday-button";
                 button.style.backgroundColor = getRandomColor(i);
+                button.href = month.toString().padStart(2, '0') + day.toString().padStart(2, '0') + ".html";
 
                 var dateLabel = document.createElement("span");
                 dateLabel.className = "date-label";
                 dateLabel.textContent = month + "/" + day;
                 button.appendChild(dateLabel);
 
-                if (i === 1) {  // 1/1のボタンの場合
-                    button.addEventListener("click", function() {
-                        window.open("https://nmocha.github.io/birthday_book/0101/");  // 新しいページを開く
-                    });
-                }
-                
                 container.appendChild(button);
 
                 day++;
