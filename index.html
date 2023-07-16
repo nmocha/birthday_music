@@ -6,13 +6,13 @@
     <title>Your Birthday & Music Color</title>
     <style>
         body {
-            font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
             /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
         }
         h1 {
             text-align: center;
             color: #696868;
-            font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
             font-size: clamp(30px, 1.5vw, 60px);
             font-weight:bold;
             /* font-family: 'Quicksand', sans-serif; */
@@ -22,7 +22,7 @@
         h2 {
             text-align: center;
             color: #696868;
-            font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
             font-size: clamp(20px, 1.5vw, 40px);
             font-weight:normal;
             /* font-family: 'Quicksand', sans-serif; */
@@ -40,26 +40,44 @@
             position: relative;
             opacity: 1; /* ボタンの不透明度を設定 (1は完全に不透明) */
             transition: opacity 0.3s; /* 不透明度が変化する速度を設定 */
-
+            transition: transform .2s;
+            /* その他のスタイル */
+            overflow: hidden; /* 追加 */
+            position: relative; /* 追加 */
         }
-        
+
+
+        /* ボタンがアクティブ（クリックされた）状態のときのスタイルを設定 */
+        .birthday-button:active {
+            transform: scale(.95);
+        }
+
+
+        .birthday-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 100%);
+        }
+
+        .birthday-button:hover::before {
+            left: 0;
+            transition: all 0.3s;
+        }
+
         .birthday-button:hover {
-            opacity: 0.7;
             -webkit-transition: all 0.3s;
             transition: all 0.3s;
             -webkit-transform: translate(0, 2px);
             transform: translate(0, 2px);
-            -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.7);
         }
 
-        /* ボタンがアクティブ（クリックされた）状態のときのスタイルを設定 */
-        .birthday-button:active {
-            -webkit-transition: all 0.5s;
-            transition: all 0.5s;
-            opacity: 0.5; /* ボタンの不透明度を半透明に設定 */
-        }
-        
+
         .date-label {
             position: absolute;
             top: 50%;
@@ -67,7 +85,7 @@
             transform: translate(-50%, -50%);
             color: white;
             font-size: clamp(8px, 1.5vw, 32px);
-            font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
             /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
         }
 
@@ -85,7 +103,7 @@
             position: relative;
             opacity: 1; /* ボタンの不透明度を設定 (1は完全に不透明) */
             font-size: clamp(12px, 2vw, 32px);
-            font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
         }
 
         .label-text {
@@ -94,23 +112,60 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: clamp(12px, 2vw, 32px);
-            font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
         }
         #tweet-button-container {
             display: flex;
             justify-content: center;
             text-align: center;
         }
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            width:8%;
+	        height:auto;
+	        padding-top:8%;
+            border: 2px solid #696868; /* 黒色の細い枠線 */
+            outline: none;
+            background-color: #ffffff; /* 背景色を白に */
+            color: #696868; /* テキスト色を黒に */
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px; /* 角丸 */
+            font-size: 18px;
+        }
+
+        #scrollTopBtn:hover {
+            background-color: #f2f2f2; /* ホバー時の背景色を薄灰色に */
+        }
     </style>
 </head>
 <body>
     <h1>🎂Your Birthday & Music Color🎧</h1>
     <p></p>
-    <h2>Find your own music.</h2>
+    <h2>Find your own music!</h2>
     <div id="birthday-buttons"></div>
+    <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
     <p></p>
 
     <script>
+        window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("scrollTopBtn").style.display = "block";
+                } else {
+                    document.getElementById("scrollTopBtn").style.display = "none";
+                }
+            }
+
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
         window.onload = function() {
             var container = document.getElementById("birthday-buttons");
 
