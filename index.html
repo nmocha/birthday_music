@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="icon" type="image/png" href="birthday-cake.png" />
-    
+    <script src="https://kit.fontawesome.com/16eab4fef0.js" crossorigin="anonymous"></script>
     <title>Your Birthday & Music Color</title>
     <style>
         body {
@@ -118,50 +118,6 @@
             font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
         }
 
-        .gradient {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(
-                farthest-corner at 0 0,
-                #ff0000 0%,
-                #ff0000 50%,
-                #0000ff 90%,
-                #0000ff 100%
-        );
-        }
-
-        .gradient:before {
-            z-index: 1;
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(
-                300px at 350px 200px,
-                rgba(255, 204, 51, 1) 0%,
-                rgba(255, 204, 51, 1) 20%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            content: "";
-        }
-
-        .gradient:after {
-            z-index: 2;
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(
-                300px at 0 350px,
-                rgba(102, 204, 255, 1) 0%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            content: "";
-        }
-
         #today-button {
             width:10%;
             height:auto;
@@ -188,8 +144,12 @@
             left: 50%;
             color: white;
             transform: translate(-50%, -50%);
-            font-size: clamp(12px, 2vw, 32px);
+            font-size: clamp(8px, 1.5vw, 32px);
             font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
+        }
+
+        #today-button:hover .today-text {
+            color: #696868; /* ホバー時の文字色をグレーに変更 */
         }
 
 
@@ -223,11 +183,72 @@
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.7);
         }
 
-        #tweet-button-container {
+        
+        .btn-wrapper {
+            position: fixed;
+            bottom: 50px;
+            left: 5px;
             display: flex;
             justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 100px;
+            text-decoration: none;
+        }
+        .btn-wrapper .button {
+            height: 60px;
+            width: 60px;
+            background: #fff;
+            margin: 0 5px;
+            text-align: start;
+            overflow: hidden;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+        }
+        .btn-wrapper .button:hover {
+            width: 180px;  /* ホバー時に幅が広がる */
+            text-decoration: none;
+        }
+        .btn-wrapper .button .icon {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            color: #1da1f2;
             text-align: center;
-            padding: 40px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            line-height: 60px;
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+        }
+        .btn-wrapper .button:hover .icon {
+            background: #1da1f2;  /* ホバー時にアイコンの色が反転 */
+            text-decoration: none;
+        }
+        .btn-wrapper .button .icon i {
+            font-size: 25px;
+            line-height: 60px;
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+        }
+        .btn-wrapper .button:hover .icon i {
+            color: #fff;
+            text-decoration: none;
+        }
+        .btn-wrapper .button span {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 60px;
+            margin-left: 10px;
+            transition: all 0.3s ease-out;
+            color: #1da1f2;
+            text-decoration: none;
+        }
+        .btn-wrapper a {
+            text-decoration: none;
         }
         #scrollTopBtn {
             display: none;
@@ -254,13 +275,12 @@
     </style>
 </head>
 <body>
-    <h1>🎂Your Birthday & Music Color🎧</h1>
+    <h1>🎂 Your Birthday & Music Color 🎧</h1>
     <p></p>
     <h2>Find your own music!</h2>
     <div id="birthday-buttons">
         <button id="today-button" class="label-button"><span class="today-text">Today</span></button>
     </div>
-    <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
     <p></p>
 
     <script>
@@ -1457,10 +1477,14 @@
         }
     </script>
     <!-- tweetボタンを新たに作成したdiv要素の中に移動 -->
-    <div id="tweet-button-container">
-        <a href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/index.html&text=Find Your Birthday Color and Music!"
-        class="twitter-share-button" data-show-count="false" data-size="large" >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
+    <div class="btn-wrapper">
+        <a rel="noopener" href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/index.html&text=🎁Find Out Birthday Color and Music🎧" target="_blank">
+            <div class="button">
+                <div class="icon"><i class="fab fa-twitter"></i></div>  <!-- fontawesome  -->
+                <span text-decoration: none;>Twitter</span>
+            </div>
+        </a>
+        </div>
     <p></p>
     <p></p>
     <p></p>

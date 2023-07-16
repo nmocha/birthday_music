@@ -4,7 +4,9 @@
 <head>
     <title>11/08 Your Birth Color</title>
     <link rel="icon" type="image/png" href="../birthday-cake.png" />
+    <script src="https://kit.fontawesome.com/16eab4fef0.js" crossorigin="anonymous"></script>
     <style>
+    
         body {
             font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
             text-align: center;
@@ -27,14 +29,15 @@
         }
 
         .home-button {
-            width: 200px;
-            height: 40%;
+            width: 30%;
+            height: 15%;
             margin: 5px auto;
             padding: 10px 20px;
             background-color: #696868;
             color: #fff;
             text-decoration: none;
             border-radius: 8px;
+            display:block;
         }
 
         /* ボタンにマウスがホバー（上にある）状態のときのスタイルを設定 */
@@ -56,19 +59,96 @@
         p{
             line-height: 0.8
         }
+
+        
+          .btn-wrapper {
+            position: fixed;
+            bottom: 50px;
+            left: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 100px;
+            text-decoration: none;
+        }
+        .btn-wrapper .button {
+            height: 60px;
+            width: 60px;
+            background: #fff;
+            margin: 0 5px;
+            text-align: start;
+            overflow: hidden;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+        }
+        .btn-wrapper .button:hover {
+            width: 180px;  /* ホバー時に幅が広がる */
+            text-decoration: none;
+        }
+        .btn-wrapper .button .icon {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            color: #1da1f2;
+            text-align: center;
+            border-radius: 50%;
+            box-sizing: border-box;
+            line-height: 60px;
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+        }
+        .btn-wrapper .button:hover .icon {
+            background: #1da1f2;  /* ホバー時にアイコンの色が反転 */
+            text-decoration: none;
+        }
+        .btn-wrapper .button .icon i {
+            font-size: 25px;
+            line-height: 60px;
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+        }
+        .btn-wrapper .button:hover .icon i {
+            color: #fff;
+            text-decoration: none;
+        }
+        .btn-wrapper .button span {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 60px;
+            margin-left: 10px;
+            transition: all 0.3s ease-out;
+            color: #1da1f2;
+            text-decoration: none;
+        }
+        .btn-wrapper a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
+    
     <h1>🎂 11/08 Your Birthday Color is #f5811e 🎂</h1>
     <div class="color-box"></div>
 
-    <h1>🎧 Album with Your Birthday Color on the jacket 🎧</h1>
-    <h2>Yusuf / Cat Stevens ‘Tea For The Tillerman (Remastered 2020)’</h2>
+    <h1>🎧 ‘Tea For The Tillerman (Remastered 2020)’ by Yusuf / Cat Stevens 🎧</h1>
+    <h2>This is the Album with Your Birthday Color on the jacket</h2>
     <div style="text-align: center;">
     <img src="../pic/after/after_Yusuf - Cat Stevens_Tea For The Tillerman (Remastered 2020).jpg" alt="Album Jacket Image" style="width: 60%; height: auto;">
     </div>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7mjSHL2Eb0kAwiKbvNNyD9" width=45%; height=45%; frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7mjSHL2Eb0kAwiKbvNNyD9" display:block; width=45%; height=70%; frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     <p></p>
+    <div class="btn-wrapper">
+    <a rel="noopener" href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/html/1108.html&text=🎂 Discovering 11/08 Birthday Color and Music🎂" target="_blank">
+        <div class="button">
+            <div class="icon"><i class="fab fa-twitter"></i></div>  <!-- fontawesome  -->
+            <span text-decoration: none;>Twitter</span>
+        </div>
+    </a>
+    </div>
     <div class="home-button">
     <a href="https://nmocha.github.io/birthday_music/index.html" class="home-button">Home</a></div>
     <p></p>
