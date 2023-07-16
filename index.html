@@ -121,6 +121,7 @@
             display: flex;
             justify-content: center;
             text-align: center;
+            padding: 40px;
         }
         #scrollTopBtn {
             display: none;
@@ -158,10 +159,24 @@
         window.onscroll = function() {scrollFunction()};
 
             function scrollFunction() {
+                var scrollTopBtn = document.getElementById("scrollTopBtn");
                 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    document.getElementById("scrollTopBtn").style.display = "block";
+                    // ページの一番下に到達したかどうかをチェック
+                    var scrollHeight = Math.max(
+                        document.body.scrollHeight, document.documentElement.scrollHeight,
+                        document.body.offsetHeight, document.documentElement.offsetHeight,
+                        document.body.clientHeight, document.documentElement.clientHeight
+                    );
+                    var scrollPosition = window.pageYOffset + window.innerHeight;
+                    if (scrollPosition >= scrollHeight) {
+                        // ページの一番下に到達した場合、ボタンを非表示にする
+                        scrollTopBtn.style.display = "none";
+                    } else {
+                        // ページの一番下に到達していない場合、ボタンを表示する
+                        scrollTopBtn.style.display = "block";
+                    }
                 } else {
-                    document.getElementById("scrollTopBtn").style.display = "none";
+                    scrollTopBtn.style.display = "none";
                 }
             }
 
@@ -169,6 +184,7 @@
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
+
         window.onload = function() {
             var container = document.getElementById("birthday-buttons");
 
@@ -1328,6 +1344,12 @@
         <a href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/index.html&text=Find Your Birthday Color and Music!"
         class="twitter-share-button" data-show-count="false" data-size="large" >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
     <p></p>
 </body>
 </html>
