@@ -117,6 +117,112 @@
             font-size: clamp(12px, 2vw, 32px);
             font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
         }
+
+        .gradient {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(
+                farthest-corner at 0 0,
+                #ff0000 0%,
+                #ff0000 50%,
+                #0000ff 90%,
+                #0000ff 100%
+        );
+        }
+
+        .gradient:before {
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(
+                300px at 350px 200px,
+                rgba(255, 204, 51, 1) 0%,
+                rgba(255, 204, 51, 1) 20%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            content: "";
+        }
+
+        .gradient:after {
+            z-index: 2;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(
+                300px at 0 350px,
+                rgba(102, 204, 255, 1) 0%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            content: "";
+        }
+
+        #today-button {
+            width:10%;
+            height:auto;
+            padding-top:10%;
+            border: none;
+            border-radius: 50%;
+            margin: 5px;
+            display: inline-block;
+            background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+            color: #696868;
+            opacity: 1; /* ボタンの不透明度を設定 (1は完全に不透明) */
+            font-size: clamp(12px, 2vw, 32px);
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
+            transition: opacity 0.3s; /* 不透明度が変化する速度を設定 */
+            transition: transform .2s;
+            /* その他のスタイル */
+            overflow: hidden; /* 追加 */
+            position: relative; /* 追加 */
+        }
+                /* Todayボタンのテキストスタイル */
+        .today-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: white;
+            transform: translate(-50%, -50%);
+            font-size: clamp(12px, 2vw, 32px);
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
+        }
+
+
+        /* ボタンがアクティブ（クリックされた）状態のときのスタイルを設定 */
+        #today-button:active {
+            transform: scale(.95);
+        }
+
+
+        #today-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 100%);
+        }
+
+        #today-button:hover::before {
+            left: 0;
+            transition: all 0.3s;
+        }
+
+        #today-button:hover {
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+            -webkit-transform: translate(0, 2px);
+            transform: translate(0, 2px);
+            -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
         #tweet-button-container {
             display: flex;
             justify-content: center;
@@ -151,7 +257,9 @@
     <h1>🎂Your Birthday & Music Color🎧</h1>
     <p></p>
     <h2>Find your own music!</h2>
-    <div id="birthday-buttons"></div>
+    <div id="birthday-buttons">
+        <button id="today-button" class="label-button"><span class="today-text">Today</span></button>
+    </div>
     <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
     <p></p>
 
@@ -187,6 +295,15 @@
 
         window.onload = function() {
             var container = document.getElementById("birthday-buttons");
+            // "Today"ボタンの設定
+            var todayButton = document.getElementById("today-button");
+            todayButton.addEventListener("click", function() {
+                var today = new Date();
+                var month = ("0" + (today.getMonth() + 1)).slice(-2);
+                var day = ("0" + today.getDate()).slice(-2);
+                window.open("html/" + month + day + ".html", "_self");
+            });
+
 
             var day = 1;
             var month = 1;
