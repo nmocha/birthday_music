@@ -98,17 +98,17 @@
             font-size: clamp(12px, 2vw, 32px);
             font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
         }
+        #tweet-button-container {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <h1>🎂Your Birthday & Music Color🎧</h1>
     <p></p>
     <h2>Find your own music.</h2>
-    <!-- twitter -->
-    <div style="text-align: center;">
-    <a href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/index.html&text=Find Your Birthday Color and Music!"
-    class="twitter-share-button" data-show-count="false" data-size="large" >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </div>
     <div id="birthday-buttons"></div>
     <p></p>
 
@@ -1267,6 +1267,11 @@
             }
         }
     </script>
+    <!-- tweetボタンを新たに作成したdiv要素の中に移動 -->
+    <div id="tweet-button-container">
+        <a href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/index.html&text=Find Your Birthday Color and Music!"
+        class="twitter-share-button" data-show-count="false" data-size="large" >Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
     <p></p>
 </body>
 </html>
