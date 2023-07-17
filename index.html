@@ -183,72 +183,95 @@
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.7);
         }
 
-        
         .btn-wrapper {
             position: fixed;
             bottom: 50px;
-            left: 5px;
+            right: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 200px;
-            height: 100px;
+            width: 400px; /* 2倍のサイズに変更 */
+            height: 200px; /* 2倍のサイズに変更 */
             text-decoration: none;
         }
+
         .btn-wrapper .button {
-            height: 60px;
-            width: 60px;
+            height: 120px; /* 2倍のサイズに変更 */
+            width: 120px; /* 2倍のサイズに変更 */
             background: #fff;
-            margin: 0 5px;
-            text-align: start;
+            margin: 0 10px; /* 2倍のサイズに変更 */
+            right: 0px;
+            text-align: right; /* テキストを右揃えに変更 */
             overflow: hidden;
-            border-radius: 50px;
+            border-radius: 100px; /* 2倍のサイズに変更 */
             cursor: pointer;
             box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease-out;
             text-decoration: none;
+            position: relative; /* 追加 */
         }
-        .btn-wrapper .button:hover {
-            width: 180px;  /* ホバー時に幅が広がる */
-            text-decoration: none;
-        }
+
         .btn-wrapper .button .icon {
             display: inline-block;
-            width: 60px;
-            height: 60px;
+            width: 120px; /* 2倍のサイズに変更 */
+            height: 120px; /* 2倍のサイズに変更 */
             color: #1da1f2;
             text-align: center;
-            border-radius: 50%;
+            border-radius: 100%; /* 2倍のサイズに変更 */
             box-sizing: border-box;
-            line-height: 60px;
+            line-height: 120px; /* 2倍のサイズに変更 */
             transition: all 0.3s ease-out;
             text-decoration: none;
         }
+
+        .btn-wrapper .button .icon i {
+            font-size: 50px; /* 2倍のサイズに変更 */
+            line-height: 120px; /* 2倍のサイズに変更 */
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+        }
+
+        .btn-wrapper .button span {
+            font-size: 40px; /* 2倍のサイズに変更 */
+            font-weight: 250;
+            line-height: 120px; /* 2倍のサイズに変更 */
+            margin-right: 400px; /* 2倍のサイズに変更 */
+            text-align: center;
+            transition: all 0.3s ease-out;
+            color: #1da1f2;
+            text-decoration: none;
+        }
+        
+        .btn-wrapper .button:hover {
+            width: 300px;  /* ホバー時に幅が広がる */
+            text-decoration: none;
+        }
+
+
         .btn-wrapper .button:hover .icon {
             background: #1da1f2;  /* ホバー時にアイコンの色が反転 */
             text-decoration: none;
         }
-        .btn-wrapper .button .icon i {
-            font-size: 25px;
-            line-height: 60px;
-            transition: all 0.3s ease-out;
-            text-decoration: none;
-        }
+        
         .btn-wrapper .button:hover .icon i {
             color: #fff;
             text-decoration: none;
         }
-        .btn-wrapper .button span {
-            font-size: 20px;
-            font-weight: 500;
-            line-height: 60px;
-            margin-left: 10px;
-            transition: all 0.3s ease-out;
-            color: #1da1f2;
-            text-decoration: none;
-        }
+
+
         .btn-wrapper a {
             text-decoration: none;
+        }
+
+        .btn-wrapper .button .hover-text {
+            position: absolute; /* 絶対位置指定 */
+            left: 30px; /* 左から10pxの位置に設定 */
+            opacity: 0; /* 最初は見えないように設定 */
+            transition: opacity 0.3s; /* ホバー時のアニメーション設定 */
+        }
+
+        .btn-wrapper .button:hover .hover-text {
+            opacity: 1; /* ホバー時に見えるように設定 */
         }
         #scrollTopBtn {
             display: none;
@@ -267,10 +290,17 @@
             padding: 15px;
             border-radius: 4px; /* 角丸 */
             font-size: 18px;
+            font-family: 'Montserrat', "Helvetica Neue","Helvetica","Arial",sans-serif;
         }
 
         #scrollTopBtn:hover {
             background-color: #f2f2f2; /* ホバー時の背景色を薄灰色に */
+        }
+        .wrap {
+        text-align: center;
+        }
+        .spotify {
+        max-width: 100%;
         }
     </style>
 </head>
@@ -282,7 +312,8 @@
         <button id="today-button" class="label-button"><span class="today-text">Today</span></button>
     </div>
     <p></p>
-
+        </a>
+        </div>
     <script>
         window.onscroll = function() {scrollFunction()};
 
@@ -314,6 +345,7 @@
             }
 
         window.onload = function() {
+
             var container = document.getElementById("birthday-buttons");
             // "Today"ボタンの設定
             var todayButton = document.getElementById("today-button");
@@ -372,1119 +404,1138 @@
                     day = 1;
                     month++;
                 }
-            }
+            };
+
+        window.onscroll = function() {
+            hideBtnWrapperOnScroll();
+        };
+    };
+
+
+    // ページが一番下までスクロールされたときに.btn-wrapperを非表示にする関数
+    function hideBtnWrapperOnScroll() {
+        var scrollHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
+        var scrollPosition = window.pageYOffset + window.innerHeight;
+        if (scrollPosition >= scrollHeight) {
+            document.querySelector('.btn-wrapper').style.display = 'none';
+        } else {
+            document.querySelector('.btn-wrapper').style.display = 'flex';
         }
+    }
         
-        function getRandomColor(i) {
-            if (i === 1) {
-                return "#FFFFE5"; // 01/01の色
-            }
-            else if (i === 2) {
-                return "#E6EAE6"; // 01/02の色
-            }
-            else if (i === 3) {
-                return "#AFAFB0"; // 01/03の色
-            }
-            else if (i === 4) {
-                return "#8D9192"; // 01/04の色
-            }
-            else if (i === 5) {
-                return "#736D71"; // 01/05の色
-            }
-            else if (i === 6) {
-                return "#705B67"; // 01/06の色
-            }
-            else if (i === 7) {
-                return "#0D0015"; // 01/07の色
-            }
-            else if (i === 8) {
-                return "#b8c43a"; // 01/08の色
-            }
-            else if (i === 9) {
-                return "#69821b"; // 01/09の色
-            }
-            else if (i === 10) {
-                return "#7b8d42"; // 01/10の色
-            }
-            else if (i === 11) {
-                return "#bdd99f"; // 01/11の色
-            }
-            else if (i === 12) {
-                return "#d6e9ca"; // 01/12の色
-            }
-            else if (i === 13) {
-                return "#37a34a"; // 01/13の色
-            }
-            else if (i === 14) {
-                return "#7b8d44"; // 01/14の色
-            }
-            else if (i === 15) {
-                return "#00552e"; // 01/15の色
-            }
-            else if (i === 16) {
-                return "#f0f6da"; // 01/16の色
-            }
-            else if (i === 17) {
-                return "#006e54"; // 01/17の色
-            }
-            else if (i === 18) {
-                return "#47744b"; // 01/18の色
-            }
-            else if (i === 19) {
-                return "#9fc24d"; // 01/19の色
-            }
-            else if (i === 20) {
-                return "#288c66"; // 01/20の色
-            }
-            else if (i === 21) {
-                return "#a0d8ef"; // 01/21の色
-            }
-            else if (i === 22) {
-                return "#00a3af"; // 01/22の色
-            }
-            else if (i === 23) {
-                return "#38a1db"; // 01/23の色
-            }
-            else if (i === 24) {
-                return "#00688b"; // 01/24の色
-            }
-            else if (i === 25) {
-                return "#0f2350"; // 01/25の色
-            }
-            else if (i === 26) {
-                return "#e3d7a3"; // 01/26の色
-            }
-            else if (i === 27) {
-                return "#fef400"; // 01/27の色
-            }
-            else if (i === 28) {
-                return "#ffd900"; // 01/28の色
-            }
-            else if (i === 29) {
-                return "#c3d825"; // 01/29の色
-            }
-            else if (i === 30) {
-                return "#529c47"; // 01/30の色
-            }
-            else if (i === 31) {
-                return "#e0ebaf"; // 01/31の色
-            }
-            else if (i === 32) {
-                return "#3f4e93"; // 02/01の色
-            }
-            else if (i === 33) {
-                return "#bc64a4"; // 02/02の色
-            }
-            else if (i === 34) {
-                return "#21297e"; // 02/03の色
-            }
-            else if (i === 35) {
-                return "#cca6bf"; // 02/04の色
-            }
-            else if (i === 36) {
-                return "#50347e"; // 02/05の色
-            }
-            else if (i === 37) {
-                return "#debdd8"; // 02/06の色
-            }
-            else if (i === 38) {
-                return "#b269a1"; // 02/07の色
-            }
-            else if (i === 39) {
-                return "#6c2735"; // 02/08の色
-            }
-            else if (i === 40) {
-                return "#ea4a6e"; // 02/09の色
-            }
-            else if (i === 41) {
-                return "#ea618e"; // 02/10の色
-            }
-            else if (i === 42) {
-                return "#d3336f"; // 02/11の色
-            }
-            else if (i === 43) {
-                return "#d5345e"; // 02/12の色
-            }
-            else if (i === 44) {
-                return "#585b54"; // 02/13の色
-            }
-            else if (i === 45) {
-                return "#726d40"; // 02/14の色
-            }
-            else if (i === 46) {
-                return "#89c3eb"; // 02/15の色
-            }
-            else if (i === 47) {
-                return "#a4c1d7"; // 02/16の色
-            }
-            else if (i === 48) {
-                return "#4c5e74"; // 02/17の色
-            }
-            else if (i === 49) {
-                return "#6c3524"; // 02/18の色
-            }
-            else if (i === 50) {
-                return "#223a70"; // 02/19の色
-            }
-            else if (i === 51) {
-                return "#fff1cf"; // 02/20の色
-            }
-            else if (i === 52) {
-                return "#fff799"; // 02/21の色
-            }
-            else if (i === 53) {
-                return "#fabf14"; // 02/22の色
-            }
-            else if (i === 54) {
-                return "#ffec47"; // 02/23の色
-            }
-            else if (i === 55) {
-                return "#d8e2ae"; // 02/24の色
-            }
-            else if (i === 56) {
-                return "#e5e8e1"; // 02/25の色
-            }
-            else if (i === 57) {
-                return "#becebc"; // 02/26の色
-            }
-            else if (i === 58) {
-                return "#a1a46d"; // 02/27の色
-            }
-            else if (i === 59) {
-                return "#5f6527"; // 02/28の色
-            }
-            else if (i === 60) {
-                return "#578a3d"; // 02/29の色
-            }
-            else if (i === 61) {
-                return "#f5b199"; // 03/01の色
-            }
-            else if (i === 62) {
-                return "#fdede4"; // 03/02の色
-            }
-            else if (i === 63) {
-                return "#f4b3c2"; // 03/03の色
-            }
-            else if (i === 64) {
-                return "#ea5550"; // 03/04の色
-            }
-            else if (i === 65) {
-                return "#cf0125"; // 03/05の色
-            }
-            else if (i === 66) {
-                return "#fef4f4"; // 03/06の色
-            }
-            else if (i === 67) {
-                return "#f3a68c"; // 03/07の色
-            }
-            else if (i === 68) {
-                return "#f2a0a1"; // 03/08の色
-            }
-            else if (i === 69) {
-                return "#f5b1aa"; // 03/09の色
-            }
-            else if (i === 70) {
-                return "#e8383d"; // 03/10の色
-            }
-            else if (i === 71) {
-                return "#f4dda5"; // 03/11の色
-            }
-            else if (i === 72) {
-                return "#e65454"; // 03/12の色
-            }
-            else if (i === 73) {
-                return "#ed6d3d"; // 03/13の色
-            }
-            else if (i === 74) {
-                return "#e23620"; // 03/14の色
-            }
-            else if (i === 75) {
-                return "#d11c1e"; // 03/15の色
-            }
-            else if (i === 76) {
-                return "#d2a4c8"; // 03/16の色
-            }
-            else if (i === 77) {
-                return "#915da3"; // 03/17の色
-            }
-            else if (i === 78) {
-                return "#985b9e"; // 03/18の色
-            }
-            else if (i === 79) {
-                return "#581074"; // 03/19の色
-            }
-            else if (i === 80) {
-                return "#895b8a"; // 03/20の色
-            }
-            else if (i === 81) {
-                return "#aaa7d0"; // 03/21の色
-            }
-            else if (i === 82) {
-                return "#ba64a0"; // 03/22の色
-            }
-            else if (i === 83) {
-                return "#745399"; // 03/23の色
-            }
-            else if (i === 84) {
-                return "#934491"; // 03/24の色
-            }
-            else if (i === 85) {
-                return "#b33e5c"; // 03/25の色
-            }
-            else if (i === 86) {
-                return "#cae2c6"; // 03/26の色
-            }
-            else if (i === 87) {
-                return "#bee0ce"; // 03/27の色
-            }
-            else if (i === 88) {
-                return "#a7d3cf"; // 03/28の色
-            }
-            else if (i === 89) {
-                return "#a3d3dd"; // 03/29の色
-            }
-            else if (i === 90) {
-                return "#49bdf0"; // 03/30の色
-            }
-            else if (i === 91) {
-                return "#ece093"; // 03/31の色
-            }
-            else if (i === 92) {
-                return "#fdeff2"; // 04/01の色
-            }
-            else if (i === 93) {
-                return "#fbdac8"; // 04/02の色
-            }
-            else if (i === 94) {
-                return "#f5a0bd"; // 04/03の色
-            }
-            else if (i === 95) {
-                return "#e383a4"; // 04/04の色
-            }
-            else if (i === 96) {
-                return "#84a2d4"; // 04/05の色
-            }
-            else if (i === 97) {
-                return "#68a9cf"; // 04/06の色
-            }
-            else if (i === 98) {
-                return "#f1f5dc"; // 04/07の色
-            }
-            else if (i === 99) {
-                return "#69b076"; // 04/08の色
-            }
-            else if (i === 100) {
-                return "#fbca4d"; // 04/09の色
-            }
-            else if (i === 101) {
-                return "#e5a323"; // 04/10の色
-            }
-            else if (i === 102) {
-                return "#ecdecf"; // 04/11の色
-            }
-            else if (i === 103) {
-                return "#a29779"; // 04/12の色
-            }
-            else if (i === 104) {
-                return "#e8ece9"; // 04/13の色
-            }
-            else if (i === 105) {
-                return "#949495"; // 04/14の色
-            }
-            else if (i === 106) {
-                return "#d5dad4"; // 04/15の色
-            }
-            else if (i === 107) {
-                return "#cbd0d3"; // 04/16の色
-            }
-            else if (i === 108) {
-                return "#898989"; // 04/17の色
-            }
-            else if (i === 109) {
-                return "#626063"; // 04/18の色
-            }
-            else if (i === 110) {
-                return "#524e4d"; // 04/19の色
-            }
-            else if (i === 111) {
-                return "#c7dc68"; // 04/20の色
-            }
-            else if (i === 112) {
-                return "#d8e698"; // 04/21の色
-            }
-            else if (i === 113) {
-                return "#2aa74b"; // 04/22の色
-            }
-            else if (i === 114) {
-                return "#88cb9d"; // 04/23の色
-            }
-            else if (i === 115) {
-                return "#a3d49c"; // 04/24の色
-            }
-            else if (i === 116) {
-                return "#79c288"; // 04/25の色
-            }
-            else if (i === 117) {
-                return "#79c266"; // 04/26の色
-            }
-            else if (i === 118) {
-                return "#00a968"; // 04/27の色
-            }
-            else if (i === 119) {
-                return "#00947a"; // 04/28の色
-            }
-            else if (i === 120) {
-                return "#00a6af"; // 04/29の色
-            }
-            else if (i === 121) {
-                return "#00b2bc"; // 04/30の色
-            }
-            else if (i === 122) {
-                return "#009b9f"; // 05/01の色
-            }
-            else if (i === 123) {
-                return "#009854"; // 05/02の色
-            }
-            else if (i === 124) {
-                return "#01686d"; // 05/03の色
-            }
-            else if (i === 125) {
-                return "#014127"; // 05/04の色
-            }
-            else if (i === 126) {
-                return "#bce2e8"; // 05/05の色
-            }
-            else if (i === 127) {
-                return "#70c6f5"; // 05/06の色
-            }
-            else if (i === 128) {
-                return "#4c6cb3"; // 05/07の色
-            }
-            else if (i === 129) {
-                return "#316745"; // 05/08の色
-            }
-            else if (i === 130) {
-                return "#2cb232"; // 05/09の色
-            }
-            else if (i === 131) {
-                return "#f5f6ca"; // 05/10の色
-            }
-            else if (i === 132) {
-                return "#d1de4c"; // 05/11の色
-            }
-            else if (i === 133) {
-                return "#e3e548"; // 05/12の色
-            }
-            else if (i === 134) {
-                return "#e4dc8a"; // 05/13の色
-            }
-            else if (i === 135) {
-                return "#72640c"; // 05/14の色
-            }
-            else if (i === 136) {
-                return "#d0c67c"; // 05/15の色
-            }
-            else if (i === 137) {
-                return "#a49627"; // 05/16の色
-            }
-            else if (i === 138) {
-                return "#8d6f2f"; // 05/17の色
-            }
-            else if (i === 139) {
-                return "#464646"; // 05/18の色
-            }
-            else if (i === 140) {
-                return "#494a41"; // 05/19の色
-            }
-            else if (i === 141) {
-                return "#8ccab0"; // 05/20の色
-            }
-            else if (i === 142) {
-                return "#47885e"; // 05/21の色
-            }
-            else if (i === 143) {
-                return "#036122"; // 05/22の色
-            }
-            else if (i === 144) {
-                return "#034415"; // 05/23の色
-            }
-            else if (i === 145) {
-                return "#264939"; // 05/24の色
-            }
-            else if (i === 146) {
-                return "#face9d"; // 05/25の色
-            }
-            else if (i === 147) {
-                return "#f9cc77"; // 05/26の色
-            }
-            else if (i === 148) {
-                return "#f8b500"; // 05/27の色
-            }
-            else if (i === 149) {
-                return "#b36029"; // 05/28の色
-            }
-            else if (i === 150) {
-                return "#7a5347"; // 05/29の色
-            }
-            else if (i === 151) {
-                return "#e8d3d1"; // 05/30の色
-            }
-            else if (i === 152) {
-                return "#f0908d"; // 05/31の色
-            }
-            else if (i === 153) {
-                return "#bea2ca"; // 06/01の色
-            }
-            else if (i === 154) {
-                return "#7058a3"; // 06/02の色
-            }
-            else if (i === 155) {
-                return "#5c1767"; // 06/03の色
-            }
-            else if (i === 156) {
-                return "#f7f7d9"; // 06/04の色
-            }
-            else if (i === 157) {
-                return "#ddeab2"; // 06/05の色
-            }
-            else if (i === 158) {
-                return "#e0de94"; // 06/06の色
-            }
-            else if (i === 159) {
-                return "#657d61"; // 06/07の色
-            }
-            else if (i === 160) {
-                return "#665a1a"; // 06/08の色
-            }
-            else if (i === 161) {
-                return "#fff8a8"; // 06/09の色
-            }
-            else if (i === 162) {
-                return "#fff352"; // 06/10の色
-            }
-            else if (i === 163) {
-                return "#f6d700"; // 06/11の色
-            }
-            else if (i === 164) {
-                return "#fac559"; // 06/12の色
-            }
-            else if (i === 165) {
-                return "#fcc800"; // 06/13の色
-            }
-            else if (i === 166) {
-                return "#f8f4e6"; // 06/14の色
-            }
-            else if (i === 167) {
-                return "#f7b894"; // 06/15の色
-            }
-            else if (i === 168) {
-                return "#c39143"; // 06/16の色
-            }
-            else if (i === 169) {
-                return "#e29399"; // 06/17の色
-            }
-            else if (i === 170) {
-                return "#724943"; // 06/18の色
-            }
-            else if (i === 171) {
-                return "#fcd575"; // 06/19の色
-            }
-            else if (i === 172) {
-                return "#f19d45"; // 06/20の色
-            }
-            else if (i === 173) {
-                return "#f39800"; // 06/21の色
-            }
-            else if (i === 174) {
-                return "#973b2c"; // 06/22の色
-            }
-            else if (i === 175) {
-                return "#773c30"; // 06/23の色
-            }
-            else if (i === 176) {
-                return "#f9bdc5"; // 06/24の色
-            }
-            else if (i === 177) {
-                return "#e1849e"; // 06/25の色
-            }
-            else if (i === 178) {
-                return "#eb5381"; // 06/26の色
-            }
-            else if (i === 179) {
-                return "#f19ca7"; // 06/27の色
-            }
-            else if (i === 180) {
-                return "#cf0141"; // 06/28の色
-            }
-            else if (i === 181) {
-                return "#bbe2f1"; // 06/29の色
-            }
-            else if (i === 182) {
-                return "#5383c3"; // 06/30の色
-            }
-            else if (i === 183) {
-                return "#007199"; // 07/01の色
-            }
-            else if (i === 184) {
-                return "#0068b7"; // 07/02の色
-            }
-            else if (i === 185) {
-                return "#003f8e"; // 07/03の色
-            }
-            else if (i === 186) {
-                return "#3fb5d3"; // 07/04の色
-            }
-            else if (i === 187) {
-                return "#4593A0"; // 07/05の色
-            }
-            else if (i === 188) {
-                return "#59b9c6"; // 07/06の色
-            }
-            else if (i === 189) {
-                return "#016171"; // 07/07の色
-            }
-            else if (i === 190) {
-                return "#006888"; // 07/08の色
-            }
-            else if (i === 191) {
-                return "#f7f6f5"; // 07/09の色
-            }
-            else if (i === 192) {
-                return "#608fc3"; // 07/10の色
-            }
-            else if (i === 193) {
-                return "#5371ad"; // 07/11の色
-            }
-            else if (i === 194) {
-                return "#044182"; // 07/12の色
-            }
-            else if (i === 195) {
-                return "#192f60"; // 07/13の色
-            }
-            else if (i === 196) {
-                return "#fdede6"; // 07/14の色
-            }
-            else if (i === 197) {
-                return "#b370a6"; // 07/15の色
-            }
-            else if (i === 198) {
-                return "#94adda"; // 07/16の色
-            }
-            else if (i === 199) {
-                return "#6b76ae"; // 07/17の色
-            }
-            else if (i === 200) {
-                return "#7f1184"; // 07/18の色
-            }
-            else if (i === 201) {
-                return "#f7a7a0"; // 07/19の色
-            }
-            else if (i === 202) {
-                return "#e49e61"; // 07/20の色
-            }
-            else if (i === 203) {
-                return "#c56950"; // 07/21の色
-            }
-            else if (i === 204) {
-                return "#b94047"; // 07/22の色
-            }
-            else if (i === 205) {
-                return "#b7282e"; // 07/23の色
-            }
-            else if (i === 206) {
-                return "#f5949f"; // 07/24の色
-            }
-            else if (i === 207) {
-                return "#de82a7"; // 07/25の色
-            }
-            else if (i === 208) {
-                return "#af363b"; // 07/26の色
-            }
-            else if (i === 209) {
-                return "#8d3446"; // 07/27の色
-            }
-            else if (i === 210) {
-                return "#404040"; // 07/28の色
-            }
-            else if (i === 211) {
-                return "#008db7"; // 07/29の色
-            }
-            else if (i === 212) {
-                return "#009e9f"; // 07/30の色
-            }
-            else if (i === 213) {
-                return "#044d78"; // 07/31の色
-            }
-            else if (i === 214) {
-                return "#438cb5"; // 08/01の色
-            }
-            else if (i === 215) {
-                return "#0098d4"; // 08/02の色
-            }
-            else if (i === 216) {
-                return "#409ecc"; // 08/03の色
-            }
-            else if (i === 217) {
-                return "#0063a7"; // 08/04の色
-            }
-            else if (i === 218) {
-                return "#1e50a2"; // 08/05の色
-            }
-            else if (i === 219) {
-                return "#004c97"; // 08/06の色
-            }
-            else if (i === 220) {
-                return "#02428c"; // 08/07の色
-            }
-            else if (i === 221) {
-                return "#164a84"; // 08/08の色
-            }
-            else if (i === 222) {
-                return "#202f55"; // 08/09の色
-            }
-            else if (i === 223) {
-                return "#3f61a1"; // 08/10の色
-            }
-            else if (i === 224) {
-                return "#55295b"; // 08/11の色
-            }
-            else if (i === 225) {
-                return "#a6a5c4"; // 08/12の色
-            }
-            else if (i === 226) {
-                return "#83ccd2"; // 08/13の色
-            }
-            else if (i === 227) {
-                return "#4cb8e7"; // 08/14の色
-            }
-            else if (i === 228) {
-                return "#ffd911"; // 08/15の色
-            }
-            else if (i === 229) {
-                return "#fffa9c"; // 08/16の色
-            }
-            else if (i === 230) {
-                return "#fff97d"; // 08/17の色
-            }
-            else if (i === 231) {
-                return "#f6ad49"; // 08/18の色
-            }
-            else if (i === 232) {
-                return "#f79101"; // 08/19の色
-            }
-            else if (i === 233) {
-                return "#f08300"; // 08/20の色
-            }
-            else if (i === 234) {
-                return "#dd7a56"; // 08/21の色
-            }
-            else if (i === 235) {
-                return "#ffcc83"; // 08/22の色
-            }
-            else if (i === 236) {
-                return "#feae01"; // 08/23の色
-            }
-            else if (i === 237) {
-                return "#c4972f"; // 08/24の色
-            }
-            else if (i === 238) {
-                return "#caac71"; // 08/25の色
-            }
-            else if (i === 239) {
-                return "#7d541c"; // 08/26の色
-            }
-            else if (i === 240) {
-                return "#a0d8ee"; // 08/27の色
-            }
-            else if (i === 241) {
-                return "#5d9cbf"; // 08/28の色
-            }
-            else if (i === 242) {
-                return "#4b7cb6"; // 08/29の色
-            }
-            else if (i === 243) {
-                return "#356cac"; // 08/30の色
-            }
-            else if (i === 244) {
-                return "#460e44"; // 08/31の色
-            }
-            else if (i === 245) {
-                return "#7dbb7c"; // 09/01の色
-            }
-            else if (i === 246) {
-                return "#368a56"; // 09/02の色
-            }
-            else if (i === 247) {
-                return "#016257"; // 09/03の色
-            }
-            else if (i === 248) {
-                return "#006b35"; // 09/04の色
-            }
-            else if (i === 249) {
-                return "#005243"; // 09/05の色
-            }
-            else if (i === 250) {
-                return "#003d26"; // 09/06の色
-            }
-            else if (i === 251) {
-                return "#6ebdc2"; // 09/07の色
-            }
-            else if (i === 252) {
-                return "#67b5b7"; // 09/08の色
-            }
-            else if (i === 253) {
-                return "#006069"; // 09/09の色
-            }
-            else if (i === 254) {
-                return "#17184b"; // 09/10の色
-            }
-            else if (i === 255) {
-                return "#003221"; // 09/11の色
-            }
-            else if (i === 256) {
-                return "#282b6e"; // 09/12の色
-            }
-            else if (i === 257) {
-                return "#28285a"; // 09/13の色
-            }
-            else if (i === 258) {
-                return "#bf783e"; // 09/14の色
-            }
-            else if (i === 259) {
-                return "#8a3b00"; // 09/15の色
-            }
-            else if (i === 260) {
-                return "#bd6856"; // 09/16の色
-            }
-            else if (i === 261) {
-                return "#7dbb7d"; // 09/17の色
-            }
-            else if (i === 262) {
-                return "#bccddb"; // 09/18の色
-            }
-            else if (i === 263) {
-                return "#7c7684"; // 09/19の色
-            }
-            else if (i === 264) {
-                return "#fffcbf"; // 09/20の色
-            }
-            else if (i === 265) {
-                return "#e3edc8"; // 09/21の色
-            }
-            else if (i === 266) {
-                return "#edee9e"; // 09/22の色
-            }
-            else if (i === 267) {
-                return "#ebe960"; // 09/23の色
-            }
-            else if (i === 268) {
-                return "#d7cf3a"; // 09/24の色
-            }
-            else if (i === 269) {
-                return "#fdb86d"; // 09/25の色
-            }
-            else if (i === 270) {
-                return "#f37f44"; // 09/26の色
-            }
-            else if (i === 271) {
-                return "#f16f4f"; // 09/27の色
-            }
-            else if (i === 272) {
-                return "#d3381c"; // 09/28の色
-            }
-            else if (i === 273) {
-                return "#e95388"; // 09/29の色
-            }
-            else if (i === 274) {
-                return "#89438c"; // 09/30の色
-            }
-            else if (i === 275) {
-                return "#ee7948"; // 10/01の色
-            }
-            else if (i === 276) {
-                return "#8f2e14"; // 10/02の色
-            }
-            else if (i === 277) {
-                return "#ed6d35"; // 10/03の色
-            }
-            else if (i === 278) {
-                return "#ec5415"; // 10/04の色
-            }
-            else if (i === 279) {
-                return "#c78a77"; // 10/05の色
-            }
-            else if (i === 280) {
-                return "#be8f68"; // 10/06の色
-            }
-            else if (i === 281) {
-                return "#946c45"; // 10/07の色
-            }
-            else if (i === 282) {
-                return "#b55233"; // 10/08の色
-            }
-            else if (i === 283) {
-                return "#7b411c"; // 10/09の色
-            }
-            else if (i === 284) {
-                return "#ba8b40"; // 10/10の色
-            }
-            else if (i === 285) {
-                return "#b76651"; // 10/11の色
-            }
-            else if (i === 286) {
-                return "#823616"; // 10/12の色
-            }
-            else if (i === 287) {
-                return "#6d3c32"; // 10/13の色
-            }
-            else if (i === 288) {
-                return "#622d18"; // 10/14の色
-            }
-            else if (i === 289) {
-                return "#bb5520"; // 10/15の色
-            }
-            else if (i === 290) {
-                return "#e9bc00"; // 10/16の色
-            }
-            else if (i === 291) {
-                return "#d7d0ca"; // 10/17の色
-            }
-            else if (i === 292) {
-                return "#c9c9c4"; // 10/18の色
-            }
-            else if (i === 293) {
-                return "#afafb5"; // 10/19の色
-            }
-            else if (i === 294) {
-                return "#7d7d7d"; // 10/20の色
-            }
-            else if (i === 295) {
-                return "#9e8b8e"; // 10/21の色
-            }
-            else if (i === 296) {
-                return "#585c5b"; // 10/22の色
-            }
-            else if (i === 297) {
-                return "#d0af4c"; // 10/23の色
-            }
-            else if (i === 298) {
-                return "#646f2d"; // 10/24の色
-            }
-            else if (i === 299) {
-                return "#9d8e87"; // 10/25の色
-            }
-            else if (i === 300) {
-                return "#548778"; // 10/26の色
-            }
-            else if (i === 301) {
-                return "#476b6b"; // 10/27の色
-            }
-            else if (i === 302) {
-                return "#6c6a6d"; // 10/28の色
-            }
-            else if (i === 303) {
-                return "#665951"; // 10/29の色
-            }
-            else if (i === 304) {
-                return "#83515d"; // 10/30の色
-            }
-            else if (i === 305) {
-                return "#d1bada"; // 10/31の色
-            }
-            else if (i === 306) {
-                return "#bf794e"; // 11/01の色
-            }
-            else if (i === 307) {
-                return "#8b724a"; // 11/02の色
-            }
-            else if (i === 308) {
-                return "#583822"; // 11/03の色
-            }
-            else if (i === 309) {
-                return "#504946"; // 11/04の色
-            }
-            else if (i === 310) {
-                return "#4e454a"; // 11/05の色
-            }
-            else if (i === 311) {
-                return "#ffcc7b"; // 11/06の色
-            }
-            else if (i === 312) {
-                return "#feb75b"; // 11/07の色
-            }
-            else if (i === 313) {
-                return "#f5811e"; // 11/08の色
-            }
-            else if (i === 314) {
-                return "#cd5e3c"; // 11/09の色
-            }
-            else if (i === 315) {
-                return "#8d6029"; // 11/10の色
-            }
-            else if (i === 316) {
-                return "#ffdfac"; // 11/11の色
-            }
-            else if (i === 317) {
-                return "#dcd3b2"; // 11/12の色
-            }
-            else if (i === 318) {
-                return "#9fa09e"; // 11/13の色
-            }
-            else if (i === 319) {
-                return "#55461b"; // 11/14の色
-            }
-            else if (i === 320) {
-                return "#473a17"; // 11/15の色
-            }
-            else if (i === 321) {
-                return "#fababa"; // 11/16の色
-            }
-            else if (i === 322) {
-                return "#da81b2"; // 11/17の色
-            }
-            else if (i === 323) {
-                return "#b4766b"; // 11/18の色
-            }
-            else if (i === 324) {
-                return "#b1585c"; // 11/19の色
-            }
-            else if (i === 325) {
-                return "#7d7b83"; // 11/20の色
-            }
-            else if (i === 326) {
-                return "#c8ceac"; // 11/21の色
-            }
-            else if (i === 327) {
-                return "#bbc8ac"; // 11/22の色
-            }
-            else if (i === 328) {
-                return "#9e9478"; // 11/23の色
-            }
-            else if (i === 329) {
-                return "#7b7c7d"; // 11/24の色
-            }
-            else if (i === 330) {
-                return "#39423f"; // 11/25の色
-            }
-            else if (i === 331) {
-                return "#fdb58f"; // 11/26の色
-            }
-            else if (i === 332) {
-                return "#fce2c4"; // 11/27の色
-            }
-            else if (i === 333) {
-                return "#b47226"; // 11/28の色
-            }
-            else if (i === 334) {
-                return "#8c6b4a"; // 11/29の色
-            }
-            else if (i === 335) {
-                return "#54513e"; // 11/30の色
-            }
-            else if (i === 336) {
-                return "#d6c6af"; // 12/01の色
-            }
-            else if (i === 337) {
-                return "#caa980"; // 12/02の色
-            }
-            else if (i === 338) {
-                return "#852e19"; // 12/03の色
-            }
-            else if (i === 339) {
-                return "#5d5644"; // 12/04の色
-            }
-            else if (i === 340) {
-                return "#4e4b3a"; // 12/05の色
-            }
-            else if (i === 341) {
-                return "#e5cc96"; // 12/06の色
-            }
-            else if (i === 342) {
-                return "#e6d89b"; // 12/07の色
-            }
-            else if (i === 343) {
-                return "#a69425"; // 12/08の色
-            }
-            else if (i === 344) {
-                return "#b4935d"; // 12/09の色
-            }
-            else if (i === 345) {
-                return "#ac6b25"; // 12/10の色
-            }
-            else if (i === 346) {
-                return "#fbbaa8"; // 12/11の色
-            }
-            else if (i === 347) {
-                return "#f79383"; // 12/12の色
-            }
-            else if (i === 348) {
-                return "#f4816f"; // 12/13の色
-            }
-            else if (i === 349) {
-                return "#eb6101"; // 12/14の色
-            }
-            else if (i === 350) {
-                return "#b16268"; // 12/15の色
-            }
-            else if (i === 351) {
-                return "#fdceba"; // 12/16の色
-            }
-            else if (i === 352) {
-                return "#eedcb3"; // 12/17の色
-            }
-            else if (i === 353) {
-                return "#b4766d"; // 12/18の色
-            }
-            else if (i === 354) {
-                return "#deb068"; // 12/19の色
-            }
-            else if (i === 355) {
-                return "#715c61"; // 12/20の色
-            }
-            else if (i === 356) {
-                return "#e0b5d3"; // 12/21の色
-            }
-            else if (i === 357) {
-                return "#9079b6"; // 12/22の色
-            }
-            else if (i === 358) {
-                return "#674196"; // 12/23の色
-            }
-            else if (i === 359) {
-                return "#241b36"; // 12/24の色
-            }
-            else if (i === 360) {
-                return "#824880"; // 12/25の色
-            }
-            else if (i === 361) {
-                return "#e6b422"; // 12/26の色
-            }
-            else if (i === 362) {
-                return "#afb293"; // 12/27の色
-            }
-            else if (i === 363) {
-                return "#cb981b"; // 12/28の色
-            }
-            else if (i === 364) {
-                return "#b2a280"; // 12/29の色
-            }
-            else if (i === 365) {
-                return "#b26724"; // 12/30の色
-            }
-            else if (i === 366) {
-                return "#00afcc"; // 12/31の色
-            }
+    function getRandomColor(i) {
+        if (i === 1) {
+            return "#FFFFE5"; // 01/01の色
         }
+        else if (i === 2) {
+            return "#E6EAE6"; // 01/02の色
+        }
+        else if (i === 3) {
+            return "#AFAFB0"; // 01/03の色
+        }
+        else if (i === 4) {
+            return "#8D9192"; // 01/04の色
+        }
+        else if (i === 5) {
+            return "#736D71"; // 01/05の色
+        }
+        else if (i === 6) {
+            return "#705B67"; // 01/06の色
+        }
+        else if (i === 7) {
+            return "#0D0015"; // 01/07の色
+        }
+        else if (i === 8) {
+            return "#b8c43a"; // 01/08の色
+        }
+        else if (i === 9) {
+            return "#69821b"; // 01/09の色
+        }
+        else if (i === 10) {
+            return "#7b8d42"; // 01/10の色
+        }
+        else if (i === 11) {
+            return "#bdd99f"; // 01/11の色
+        }
+        else if (i === 12) {
+            return "#d6e9ca"; // 01/12の色
+        }
+        else if (i === 13) {
+            return "#37a34a"; // 01/13の色
+        }
+        else if (i === 14) {
+            return "#7b8d44"; // 01/14の色
+        }
+        else if (i === 15) {
+            return "#00552e"; // 01/15の色
+        }
+        else if (i === 16) {
+            return "#f0f6da"; // 01/16の色
+        }
+        else if (i === 17) {
+            return "#006e54"; // 01/17の色
+        }
+        else if (i === 18) {
+            return "#47744b"; // 01/18の色
+        }
+        else if (i === 19) {
+            return "#9fc24d"; // 01/19の色
+        }
+        else if (i === 20) {
+            return "#288c66"; // 01/20の色
+        }
+        else if (i === 21) {
+            return "#a0d8ef"; // 01/21の色
+        }
+        else if (i === 22) {
+            return "#00a3af"; // 01/22の色
+        }
+        else if (i === 23) {
+            return "#38a1db"; // 01/23の色
+        }
+        else if (i === 24) {
+            return "#00688b"; // 01/24の色
+        }
+        else if (i === 25) {
+            return "#0f2350"; // 01/25の色
+        }
+        else if (i === 26) {
+            return "#e3d7a3"; // 01/26の色
+        }
+        else if (i === 27) {
+            return "#fef400"; // 01/27の色
+        }
+        else if (i === 28) {
+            return "#ffd900"; // 01/28の色
+        }
+        else if (i === 29) {
+            return "#c3d825"; // 01/29の色
+        }
+        else if (i === 30) {
+            return "#529c47"; // 01/30の色
+        }
+        else if (i === 31) {
+            return "#e0ebaf"; // 01/31の色
+        }
+        else if (i === 32) {
+            return "#3f4e93"; // 02/01の色
+        }
+        else if (i === 33) {
+            return "#bc64a4"; // 02/02の色
+        }
+        else if (i === 34) {
+            return "#21297e"; // 02/03の色
+        }
+        else if (i === 35) {
+            return "#cca6bf"; // 02/04の色
+        }
+        else if (i === 36) {
+            return "#50347e"; // 02/05の色
+        }
+        else if (i === 37) {
+            return "#debdd8"; // 02/06の色
+        }
+        else if (i === 38) {
+            return "#b269a1"; // 02/07の色
+        }
+        else if (i === 39) {
+            return "#6c2735"; // 02/08の色
+        }
+        else if (i === 40) {
+            return "#ea4a6e"; // 02/09の色
+        }
+        else if (i === 41) {
+            return "#ea618e"; // 02/10の色
+        }
+        else if (i === 42) {
+            return "#d3336f"; // 02/11の色
+        }
+        else if (i === 43) {
+            return "#d5345e"; // 02/12の色
+        }
+        else if (i === 44) {
+            return "#585b54"; // 02/13の色
+        }
+        else if (i === 45) {
+            return "#726d40"; // 02/14の色
+        }
+        else if (i === 46) {
+            return "#89c3eb"; // 02/15の色
+        }
+        else if (i === 47) {
+            return "#a4c1d7"; // 02/16の色
+        }
+        else if (i === 48) {
+            return "#4c5e74"; // 02/17の色
+        }
+        else if (i === 49) {
+            return "#6c3524"; // 02/18の色
+        }
+        else if (i === 50) {
+            return "#223a70"; // 02/19の色
+        }
+        else if (i === 51) {
+            return "#fff1cf"; // 02/20の色
+        }
+        else if (i === 52) {
+            return "#fff799"; // 02/21の色
+        }
+        else if (i === 53) {
+            return "#fabf14"; // 02/22の色
+        }
+        else if (i === 54) {
+            return "#ffec47"; // 02/23の色
+        }
+        else if (i === 55) {
+            return "#d8e2ae"; // 02/24の色
+        }
+        else if (i === 56) {
+            return "#e5e8e1"; // 02/25の色
+        }
+        else if (i === 57) {
+            return "#becebc"; // 02/26の色
+        }
+        else if (i === 58) {
+            return "#a1a46d"; // 02/27の色
+        }
+        else if (i === 59) {
+            return "#5f6527"; // 02/28の色
+        }
+        else if (i === 60) {
+            return "#578a3d"; // 02/29の色
+        }
+        else if (i === 61) {
+            return "#f5b199"; // 03/01の色
+        }
+        else if (i === 62) {
+            return "#fdede4"; // 03/02の色
+        }
+        else if (i === 63) {
+            return "#f4b3c2"; // 03/03の色
+        }
+        else if (i === 64) {
+            return "#ea5550"; // 03/04の色
+        }
+        else if (i === 65) {
+            return "#cf0125"; // 03/05の色
+        }
+        else if (i === 66) {
+            return "#fef4f4"; // 03/06の色
+        }
+        else if (i === 67) {
+            return "#f3a68c"; // 03/07の色
+        }
+        else if (i === 68) {
+            return "#f2a0a1"; // 03/08の色
+        }
+        else if (i === 69) {
+            return "#f5b1aa"; // 03/09の色
+        }
+        else if (i === 70) {
+            return "#e8383d"; // 03/10の色
+        }
+        else if (i === 71) {
+            return "#f4dda5"; // 03/11の色
+        }
+        else if (i === 72) {
+            return "#e65454"; // 03/12の色
+        }
+        else if (i === 73) {
+            return "#ed6d3d"; // 03/13の色
+        }
+        else if (i === 74) {
+            return "#e23620"; // 03/14の色
+        }
+        else if (i === 75) {
+            return "#d11c1e"; // 03/15の色
+        }
+        else if (i === 76) {
+            return "#d2a4c8"; // 03/16の色
+        }
+        else if (i === 77) {
+            return "#915da3"; // 03/17の色
+        }
+        else if (i === 78) {
+            return "#985b9e"; // 03/18の色
+        }
+        else if (i === 79) {
+            return "#581074"; // 03/19の色
+        }
+        else if (i === 80) {
+            return "#895b8a"; // 03/20の色
+        }
+        else if (i === 81) {
+            return "#aaa7d0"; // 03/21の色
+        }
+        else if (i === 82) {
+            return "#ba64a0"; // 03/22の色
+        }
+        else if (i === 83) {
+            return "#745399"; // 03/23の色
+        }
+        else if (i === 84) {
+            return "#934491"; // 03/24の色
+        }
+        else if (i === 85) {
+            return "#b33e5c"; // 03/25の色
+        }
+        else if (i === 86) {
+            return "#cae2c6"; // 03/26の色
+        }
+        else if (i === 87) {
+            return "#bee0ce"; // 03/27の色
+        }
+        else if (i === 88) {
+            return "#a7d3cf"; // 03/28の色
+        }
+        else if (i === 89) {
+            return "#a3d3dd"; // 03/29の色
+        }
+        else if (i === 90) {
+            return "#49bdf0"; // 03/30の色
+        }
+        else if (i === 91) {
+            return "#ece093"; // 03/31の色
+        }
+        else if (i === 92) {
+            return "#fdeff2"; // 04/01の色
+        }
+        else if (i === 93) {
+            return "#fbdac8"; // 04/02の色
+        }
+        else if (i === 94) {
+            return "#f5a0bd"; // 04/03の色
+        }
+        else if (i === 95) {
+            return "#e383a4"; // 04/04の色
+        }
+        else if (i === 96) {
+            return "#84a2d4"; // 04/05の色
+        }
+        else if (i === 97) {
+            return "#68a9cf"; // 04/06の色
+        }
+        else if (i === 98) {
+            return "#f1f5dc"; // 04/07の色
+        }
+        else if (i === 99) {
+            return "#69b076"; // 04/08の色
+        }
+        else if (i === 100) {
+            return "#fbca4d"; // 04/09の色
+        }
+        else if (i === 101) {
+            return "#e5a323"; // 04/10の色
+        }
+        else if (i === 102) {
+            return "#ecdecf"; // 04/11の色
+        }
+        else if (i === 103) {
+            return "#a29779"; // 04/12の色
+        }
+        else if (i === 104) {
+            return "#e8ece9"; // 04/13の色
+        }
+        else if (i === 105) {
+            return "#949495"; // 04/14の色
+        }
+        else if (i === 106) {
+            return "#d5dad4"; // 04/15の色
+        }
+        else if (i === 107) {
+            return "#cbd0d3"; // 04/16の色
+        }
+        else if (i === 108) {
+            return "#898989"; // 04/17の色
+        }
+        else if (i === 109) {
+            return "#626063"; // 04/18の色
+        }
+        else if (i === 110) {
+            return "#524e4d"; // 04/19の色
+        }
+        else if (i === 111) {
+            return "#c7dc68"; // 04/20の色
+        }
+        else if (i === 112) {
+            return "#d8e698"; // 04/21の色
+        }
+        else if (i === 113) {
+            return "#2aa74b"; // 04/22の色
+        }
+        else if (i === 114) {
+            return "#88cb9d"; // 04/23の色
+        }
+        else if (i === 115) {
+            return "#a3d49c"; // 04/24の色
+        }
+        else if (i === 116) {
+            return "#79c288"; // 04/25の色
+        }
+        else if (i === 117) {
+            return "#79c266"; // 04/26の色
+        }
+        else if (i === 118) {
+            return "#00a968"; // 04/27の色
+        }
+        else if (i === 119) {
+            return "#00947a"; // 04/28の色
+        }
+        else if (i === 120) {
+            return "#00a6af"; // 04/29の色
+        }
+        else if (i === 121) {
+            return "#00b2bc"; // 04/30の色
+        }
+        else if (i === 122) {
+            return "#009b9f"; // 05/01の色
+        }
+        else if (i === 123) {
+            return "#009854"; // 05/02の色
+        }
+        else if (i === 124) {
+            return "#01686d"; // 05/03の色
+        }
+        else if (i === 125) {
+            return "#014127"; // 05/04の色
+        }
+        else if (i === 126) {
+            return "#bce2e8"; // 05/05の色
+        }
+        else if (i === 127) {
+            return "#70c6f5"; // 05/06の色
+        }
+        else if (i === 128) {
+            return "#4c6cb3"; // 05/07の色
+        }
+        else if (i === 129) {
+            return "#316745"; // 05/08の色
+        }
+        else if (i === 130) {
+            return "#2cb232"; // 05/09の色
+        }
+        else if (i === 131) {
+            return "#f5f6ca"; // 05/10の色
+        }
+        else if (i === 132) {
+            return "#d1de4c"; // 05/11の色
+        }
+        else if (i === 133) {
+            return "#e3e548"; // 05/12の色
+        }
+        else if (i === 134) {
+            return "#e4dc8a"; // 05/13の色
+        }
+        else if (i === 135) {
+            return "#72640c"; // 05/14の色
+        }
+        else if (i === 136) {
+            return "#d0c67c"; // 05/15の色
+        }
+        else if (i === 137) {
+            return "#a49627"; // 05/16の色
+        }
+        else if (i === 138) {
+            return "#8d6f2f"; // 05/17の色
+        }
+        else if (i === 139) {
+            return "#464646"; // 05/18の色
+        }
+        else if (i === 140) {
+            return "#494a41"; // 05/19の色
+        }
+        else if (i === 141) {
+            return "#8ccab0"; // 05/20の色
+        }
+        else if (i === 142) {
+            return "#47885e"; // 05/21の色
+        }
+        else if (i === 143) {
+            return "#036122"; // 05/22の色
+        }
+        else if (i === 144) {
+            return "#034415"; // 05/23の色
+        }
+        else if (i === 145) {
+            return "#264939"; // 05/24の色
+        }
+        else if (i === 146) {
+            return "#face9d"; // 05/25の色
+        }
+        else if (i === 147) {
+            return "#f9cc77"; // 05/26の色
+        }
+        else if (i === 148) {
+            return "#f8b500"; // 05/27の色
+        }
+        else if (i === 149) {
+            return "#b36029"; // 05/28の色
+        }
+        else if (i === 150) {
+            return "#7a5347"; // 05/29の色
+        }
+        else if (i === 151) {
+            return "#e8d3d1"; // 05/30の色
+        }
+        else if (i === 152) {
+            return "#f0908d"; // 05/31の色
+        }
+        else if (i === 153) {
+            return "#bea2ca"; // 06/01の色
+        }
+        else if (i === 154) {
+            return "#7058a3"; // 06/02の色
+        }
+        else if (i === 155) {
+            return "#5c1767"; // 06/03の色
+        }
+        else if (i === 156) {
+            return "#f7f7d9"; // 06/04の色
+        }
+        else if (i === 157) {
+            return "#ddeab2"; // 06/05の色
+        }
+        else if (i === 158) {
+            return "#e0de94"; // 06/06の色
+        }
+        else if (i === 159) {
+            return "#657d61"; // 06/07の色
+        }
+        else if (i === 160) {
+            return "#665a1a"; // 06/08の色
+        }
+        else if (i === 161) {
+            return "#fff8a8"; // 06/09の色
+        }
+        else if (i === 162) {
+            return "#fff352"; // 06/10の色
+        }
+        else if (i === 163) {
+            return "#f6d700"; // 06/11の色
+        }
+        else if (i === 164) {
+            return "#fac559"; // 06/12の色
+        }
+        else if (i === 165) {
+            return "#fcc800"; // 06/13の色
+        }
+        else if (i === 166) {
+            return "#f8f4e6"; // 06/14の色
+        }
+        else if (i === 167) {
+            return "#f7b894"; // 06/15の色
+        }
+        else if (i === 168) {
+            return "#c39143"; // 06/16の色
+        }
+        else if (i === 169) {
+            return "#e29399"; // 06/17の色
+        }
+        else if (i === 170) {
+            return "#724943"; // 06/18の色
+        }
+        else if (i === 171) {
+            return "#fcd575"; // 06/19の色
+        }
+        else if (i === 172) {
+            return "#f19d45"; // 06/20の色
+        }
+        else if (i === 173) {
+            return "#f39800"; // 06/21の色
+        }
+        else if (i === 174) {
+            return "#973b2c"; // 06/22の色
+        }
+        else if (i === 175) {
+            return "#773c30"; // 06/23の色
+        }
+        else if (i === 176) {
+            return "#f9bdc5"; // 06/24の色
+        }
+        else if (i === 177) {
+            return "#e1849e"; // 06/25の色
+        }
+        else if (i === 178) {
+            return "#eb5381"; // 06/26の色
+        }
+        else if (i === 179) {
+            return "#f19ca7"; // 06/27の色
+        }
+        else if (i === 180) {
+            return "#cf0141"; // 06/28の色
+        }
+        else if (i === 181) {
+            return "#bbe2f1"; // 06/29の色
+        }
+        else if (i === 182) {
+            return "#5383c3"; // 06/30の色
+        }
+        else if (i === 183) {
+            return "#007199"; // 07/01の色
+        }
+        else if (i === 184) {
+            return "#0068b7"; // 07/02の色
+        }
+        else if (i === 185) {
+            return "#003f8e"; // 07/03の色
+        }
+        else if (i === 186) {
+            return "#3fb5d3"; // 07/04の色
+        }
+        else if (i === 187) {
+            return "#4593A0"; // 07/05の色
+        }
+        else if (i === 188) {
+            return "#59b9c6"; // 07/06の色
+        }
+        else if (i === 189) {
+            return "#016171"; // 07/07の色
+        }
+        else if (i === 190) {
+            return "#006888"; // 07/08の色
+        }
+        else if (i === 191) {
+            return "#f7f6f5"; // 07/09の色
+        }
+        else if (i === 192) {
+            return "#608fc3"; // 07/10の色
+        }
+        else if (i === 193) {
+            return "#5371ad"; // 07/11の色
+        }
+        else if (i === 194) {
+            return "#044182"; // 07/12の色
+        }
+        else if (i === 195) {
+            return "#192f60"; // 07/13の色
+        }
+        else if (i === 196) {
+            return "#fdede6"; // 07/14の色
+        }
+        else if (i === 197) {
+            return "#b370a6"; // 07/15の色
+        }
+        else if (i === 198) {
+            return "#94adda"; // 07/16の色
+        }
+        else if (i === 199) {
+            return "#6b76ae"; // 07/17の色
+        }
+        else if (i === 200) {
+            return "#7f1184"; // 07/18の色
+        }
+        else if (i === 201) {
+            return "#f7a7a0"; // 07/19の色
+        }
+        else if (i === 202) {
+            return "#e49e61"; // 07/20の色
+        }
+        else if (i === 203) {
+            return "#c56950"; // 07/21の色
+        }
+        else if (i === 204) {
+            return "#b94047"; // 07/22の色
+        }
+        else if (i === 205) {
+            return "#b7282e"; // 07/23の色
+        }
+        else if (i === 206) {
+            return "#f5949f"; // 07/24の色
+        }
+        else if (i === 207) {
+            return "#de82a7"; // 07/25の色
+        }
+        else if (i === 208) {
+            return "#af363b"; // 07/26の色
+        }
+        else if (i === 209) {
+            return "#8d3446"; // 07/27の色
+        }
+        else if (i === 210) {
+            return "#404040"; // 07/28の色
+        }
+        else if (i === 211) {
+            return "#008db7"; // 07/29の色
+        }
+        else if (i === 212) {
+            return "#009e9f"; // 07/30の色
+        }
+        else if (i === 213) {
+            return "#044d78"; // 07/31の色
+        }
+        else if (i === 214) {
+            return "#438cb5"; // 08/01の色
+        }
+        else if (i === 215) {
+            return "#0098d4"; // 08/02の色
+        }
+        else if (i === 216) {
+            return "#409ecc"; // 08/03の色
+        }
+        else if (i === 217) {
+            return "#0063a7"; // 08/04の色
+        }
+        else if (i === 218) {
+            return "#1e50a2"; // 08/05の色
+        }
+        else if (i === 219) {
+            return "#004c97"; // 08/06の色
+        }
+        else if (i === 220) {
+            return "#02428c"; // 08/07の色
+        }
+        else if (i === 221) {
+            return "#164a84"; // 08/08の色
+        }
+        else if (i === 222) {
+            return "#202f55"; // 08/09の色
+        }
+        else if (i === 223) {
+            return "#3f61a1"; // 08/10の色
+        }
+        else if (i === 224) {
+            return "#55295b"; // 08/11の色
+        }
+        else if (i === 225) {
+            return "#a6a5c4"; // 08/12の色
+        }
+        else if (i === 226) {
+            return "#83ccd2"; // 08/13の色
+        }
+        else if (i === 227) {
+            return "#4cb8e7"; // 08/14の色
+        }
+        else if (i === 228) {
+            return "#ffd911"; // 08/15の色
+        }
+        else if (i === 229) {
+            return "#fffa9c"; // 08/16の色
+        }
+        else if (i === 230) {
+            return "#fff97d"; // 08/17の色
+        }
+        else if (i === 231) {
+            return "#f6ad49"; // 08/18の色
+        }
+        else if (i === 232) {
+            return "#f79101"; // 08/19の色
+        }
+        else if (i === 233) {
+            return "#f08300"; // 08/20の色
+        }
+        else if (i === 234) {
+            return "#dd7a56"; // 08/21の色
+        }
+        else if (i === 235) {
+            return "#ffcc83"; // 08/22の色
+        }
+        else if (i === 236) {
+            return "#feae01"; // 08/23の色
+        }
+        else if (i === 237) {
+            return "#c4972f"; // 08/24の色
+        }
+        else if (i === 238) {
+            return "#caac71"; // 08/25の色
+        }
+        else if (i === 239) {
+            return "#7d541c"; // 08/26の色
+        }
+        else if (i === 240) {
+            return "#a0d8ee"; // 08/27の色
+        }
+        else if (i === 241) {
+            return "#5d9cbf"; // 08/28の色
+        }
+        else if (i === 242) {
+            return "#4b7cb6"; // 08/29の色
+        }
+        else if (i === 243) {
+            return "#356cac"; // 08/30の色
+        }
+        else if (i === 244) {
+            return "#460e44"; // 08/31の色
+        }
+        else if (i === 245) {
+            return "#7dbb7c"; // 09/01の色
+        }
+        else if (i === 246) {
+            return "#368a56"; // 09/02の色
+        }
+        else if (i === 247) {
+            return "#016257"; // 09/03の色
+        }
+        else if (i === 248) {
+            return "#006b35"; // 09/04の色
+        }
+        else if (i === 249) {
+            return "#005243"; // 09/05の色
+        }
+        else if (i === 250) {
+            return "#003d26"; // 09/06の色
+        }
+        else if (i === 251) {
+            return "#6ebdc2"; // 09/07の色
+        }
+        else if (i === 252) {
+            return "#67b5b7"; // 09/08の色
+        }
+        else if (i === 253) {
+            return "#006069"; // 09/09の色
+        }
+        else if (i === 254) {
+            return "#17184b"; // 09/10の色
+        }
+        else if (i === 255) {
+            return "#003221"; // 09/11の色
+        }
+        else if (i === 256) {
+            return "#282b6e"; // 09/12の色
+        }
+        else if (i === 257) {
+            return "#28285a"; // 09/13の色
+        }
+        else if (i === 258) {
+            return "#bf783e"; // 09/14の色
+        }
+        else if (i === 259) {
+            return "#8a3b00"; // 09/15の色
+        }
+        else if (i === 260) {
+            return "#bd6856"; // 09/16の色
+        }
+        else if (i === 261) {
+            return "#7dbb7d"; // 09/17の色
+        }
+        else if (i === 262) {
+            return "#bccddb"; // 09/18の色
+        }
+        else if (i === 263) {
+            return "#7c7684"; // 09/19の色
+        }
+        else if (i === 264) {
+            return "#fffcbf"; // 09/20の色
+        }
+        else if (i === 265) {
+            return "#e3edc8"; // 09/21の色
+        }
+        else if (i === 266) {
+            return "#edee9e"; // 09/22の色
+        }
+        else if (i === 267) {
+            return "#ebe960"; // 09/23の色
+        }
+        else if (i === 268) {
+            return "#d7cf3a"; // 09/24の色
+        }
+        else if (i === 269) {
+            return "#fdb86d"; // 09/25の色
+        }
+        else if (i === 270) {
+            return "#f37f44"; // 09/26の色
+        }
+        else if (i === 271) {
+            return "#f16f4f"; // 09/27の色
+        }
+        else if (i === 272) {
+            return "#d3381c"; // 09/28の色
+        }
+        else if (i === 273) {
+            return "#e95388"; // 09/29の色
+        }
+        else if (i === 274) {
+            return "#89438c"; // 09/30の色
+        }
+        else if (i === 275) {
+            return "#ee7948"; // 10/01の色
+        }
+        else if (i === 276) {
+            return "#8f2e14"; // 10/02の色
+        }
+        else if (i === 277) {
+            return "#ed6d35"; // 10/03の色
+        }
+        else if (i === 278) {
+            return "#ec5415"; // 10/04の色
+        }
+        else if (i === 279) {
+            return "#c78a77"; // 10/05の色
+        }
+        else if (i === 280) {
+            return "#be8f68"; // 10/06の色
+        }
+        else if (i === 281) {
+            return "#946c45"; // 10/07の色
+        }
+        else if (i === 282) {
+            return "#b55233"; // 10/08の色
+        }
+        else if (i === 283) {
+            return "#7b411c"; // 10/09の色
+        }
+        else if (i === 284) {
+            return "#ba8b40"; // 10/10の色
+        }
+        else if (i === 285) {
+            return "#b76651"; // 10/11の色
+        }
+        else if (i === 286) {
+            return "#823616"; // 10/12の色
+        }
+        else if (i === 287) {
+            return "#6d3c32"; // 10/13の色
+        }
+        else if (i === 288) {
+            return "#622d18"; // 10/14の色
+        }
+        else if (i === 289) {
+            return "#bb5520"; // 10/15の色
+        }
+        else if (i === 290) {
+            return "#e9bc00"; // 10/16の色
+        }
+        else if (i === 291) {
+            return "#d7d0ca"; // 10/17の色
+        }
+        else if (i === 292) {
+            return "#c9c9c4"; // 10/18の色
+        }
+        else if (i === 293) {
+            return "#afafb5"; // 10/19の色
+        }
+        else if (i === 294) {
+            return "#7d7d7d"; // 10/20の色
+        }
+        else if (i === 295) {
+            return "#9e8b8e"; // 10/21の色
+        }
+        else if (i === 296) {
+            return "#585c5b"; // 10/22の色
+        }
+        else if (i === 297) {
+            return "#d0af4c"; // 10/23の色
+        }
+        else if (i === 298) {
+            return "#646f2d"; // 10/24の色
+        }
+        else if (i === 299) {
+            return "#9d8e87"; // 10/25の色
+        }
+        else if (i === 300) {
+            return "#548778"; // 10/26の色
+        }
+        else if (i === 301) {
+            return "#476b6b"; // 10/27の色
+        }
+        else if (i === 302) {
+            return "#6c6a6d"; // 10/28の色
+        }
+        else if (i === 303) {
+            return "#665951"; // 10/29の色
+        }
+        else if (i === 304) {
+            return "#83515d"; // 10/30の色
+        }
+        else if (i === 305) {
+            return "#d1bada"; // 10/31の色
+        }
+        else if (i === 306) {
+            return "#bf794e"; // 11/01の色
+        }
+        else if (i === 307) {
+            return "#8b724a"; // 11/02の色
+        }
+        else if (i === 308) {
+            return "#583822"; // 11/03の色
+        }
+        else if (i === 309) {
+            return "#504946"; // 11/04の色
+        }
+        else if (i === 310) {
+            return "#4e454a"; // 11/05の色
+        }
+        else if (i === 311) {
+            return "#ffcc7b"; // 11/06の色
+        }
+        else if (i === 312) {
+            return "#feb75b"; // 11/07の色
+        }
+        else if (i === 313) {
+            return "#f5811e"; // 11/08の色
+        }
+        else if (i === 314) {
+            return "#cd5e3c"; // 11/09の色
+        }
+        else if (i === 315) {
+            return "#8d6029"; // 11/10の色
+        }
+        else if (i === 316) {
+            return "#ffdfac"; // 11/11の色
+        }
+        else if (i === 317) {
+            return "#dcd3b2"; // 11/12の色
+        }
+        else if (i === 318) {
+            return "#9fa09e"; // 11/13の色
+        }
+        else if (i === 319) {
+            return "#55461b"; // 11/14の色
+        }
+        else if (i === 320) {
+            return "#473a17"; // 11/15の色
+        }
+        else if (i === 321) {
+            return "#fababa"; // 11/16の色
+        }
+        else if (i === 322) {
+            return "#da81b2"; // 11/17の色
+        }
+        else if (i === 323) {
+            return "#b4766b"; // 11/18の色
+        }
+        else if (i === 324) {
+            return "#b1585c"; // 11/19の色
+        }
+        else if (i === 325) {
+            return "#7d7b83"; // 11/20の色
+        }
+        else if (i === 326) {
+            return "#c8ceac"; // 11/21の色
+        }
+        else if (i === 327) {
+            return "#bbc8ac"; // 11/22の色
+        }
+        else if (i === 328) {
+            return "#9e9478"; // 11/23の色
+        }
+        else if (i === 329) {
+            return "#7b7c7d"; // 11/24の色
+        }
+        else if (i === 330) {
+            return "#39423f"; // 11/25の色
+        }
+        else if (i === 331) {
+            return "#fdb58f"; // 11/26の色
+        }
+        else if (i === 332) {
+            return "#fce2c4"; // 11/27の色
+        }
+        else if (i === 333) {
+            return "#b47226"; // 11/28の色
+        }
+        else if (i === 334) {
+            return "#8c6b4a"; // 11/29の色
+        }
+        else if (i === 335) {
+            return "#54513e"; // 11/30の色
+        }
+        else if (i === 336) {
+            return "#d6c6af"; // 12/01の色
+        }
+        else if (i === 337) {
+            return "#caa980"; // 12/02の色
+        }
+        else if (i === 338) {
+            return "#852e19"; // 12/03の色
+        }
+        else if (i === 339) {
+            return "#5d5644"; // 12/04の色
+        }
+        else if (i === 340) {
+            return "#4e4b3a"; // 12/05の色
+        }
+        else if (i === 341) {
+            return "#e5cc96"; // 12/06の色
+        }
+        else if (i === 342) {
+            return "#e6d89b"; // 12/07の色
+        }
+        else if (i === 343) {
+            return "#a69425"; // 12/08の色
+        }
+        else if (i === 344) {
+            return "#b4935d"; // 12/09の色
+        }
+        else if (i === 345) {
+            return "#ac6b25"; // 12/10の色
+        }
+        else if (i === 346) {
+            return "#fbbaa8"; // 12/11の色
+        }
+        else if (i === 347) {
+            return "#f79383"; // 12/12の色
+        }
+        else if (i === 348) {
+            return "#f4816f"; // 12/13の色
+        }
+        else if (i === 349) {
+            return "#eb6101"; // 12/14の色
+        }
+        else if (i === 350) {
+            return "#b16268"; // 12/15の色
+        }
+        else if (i === 351) {
+            return "#fdceba"; // 12/16の色
+        }
+        else if (i === 352) {
+            return "#eedcb3"; // 12/17の色
+        }
+        else if (i === 353) {
+            return "#b4766d"; // 12/18の色
+        }
+        else if (i === 354) {
+            return "#deb068"; // 12/19の色
+        }
+        else if (i === 355) {
+            return "#715c61"; // 12/20の色
+        }
+        else if (i === 356) {
+            return "#e0b5d3"; // 12/21の色
+        }
+        else if (i === 357) {
+            return "#9079b6"; // 12/22の色
+        }
+        else if (i === 358) {
+            return "#674196"; // 12/23の色
+        }
+        else if (i === 359) {
+            return "#241b36"; // 12/24の色
+        }
+        else if (i === 360) {
+            return "#824880"; // 12/25の色
+        }
+        else if (i === 361) {
+            return "#e6b422"; // 12/26の色
+        }
+        else if (i === 362) {
+            return "#afb293"; // 12/27の色
+        }
+        else if (i === 363) {
+            return "#cb981b"; // 12/28の色
+        }
+        else if (i === 364) {
+            return "#b2a280"; // 12/29の色
+        }
+        else if (i === 365) {
+            return "#b26724"; // 12/30の色
+        }
+        else if (i === 366) {
+            return "#00afcc"; // 12/31の色
+        }
+    }
     </script>
-    <!-- tweetボタンを新たに作成したdiv要素の中に移動 -->
     <div class="btn-wrapper">
         <a rel="noopener" href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/index.html&text=🎁Find Out Birthday Color and Music🎧" target="_blank">
             <div class="button">
                 <div class="icon"><i class="fab fa-twitter"></i></div>  <!-- fontawesome  -->
-                <span text-decoration: none;>Twitter</span>
-            </div>
-        </a>
-        </div>
+                <span class="hover-text">Twitter</span> <!-- ホバーテキストの追加 -->
+            </a>
+        </div></div>
+
     <p></p>
     <p></p>
     <p></p>
@@ -1492,5 +1543,8 @@
     <p></p>
     <p></p>
     <p></p>
+    <div class="wrap">
+    <iframe class="spotify" width="700" height="300" src="https://open.spotify.com/embed/track/0W8jtYipop2puuuLaoRQbn" display:block;; frameborder="0" allowtransparency="true" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 </body>
 </html>

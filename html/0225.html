@@ -59,73 +59,96 @@
         p{
             line-height: 0.8
         }
-
         
-          .btn-wrapper {
+        .btn-wrapper {
             position: fixed;
             bottom: 50px;
-            left: 5px;
+            right: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 200px;
-            height: 100px;
+            width: 400px; /* 2倍のサイズに変更 */
+            height: 200px; /* 2倍のサイズに変更 */
             text-decoration: none;
         }
+
         .btn-wrapper .button {
-            height: 60px;
-            width: 60px;
+            height: 120px; /* 2倍のサイズに変更 */
+            width: 120px; /* 2倍のサイズに変更 */
             background: #fff;
-            margin: 0 5px;
-            text-align: start;
+            margin: 0 10px; /* 2倍のサイズに変更 */
+            right: 0px;
+            text-align: right; /* テキストを右揃えに変更 */
             overflow: hidden;
-            border-radius: 50px;
+            border-radius: 100px; /* 2倍のサイズに変更 */
             cursor: pointer;
             box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease-out;
             text-decoration: none;
+            position: relative; /* 追加 */
         }
-        .btn-wrapper .button:hover {
-            width: 180px;  /* ホバー時に幅が広がる */
-            text-decoration: none;
-        }
+
         .btn-wrapper .button .icon {
             display: inline-block;
-            width: 60px;
-            height: 60px;
+            width: 120px; /* 2倍のサイズに変更 */
+            height: 120px; /* 2倍のサイズに変更 */
             color: #1da1f2;
             text-align: center;
-            border-radius: 50%;
+            border-radius: 100%; /* 2倍のサイズに変更 */
             box-sizing: border-box;
-            line-height: 60px;
+            line-height: 120px; /* 2倍のサイズに変更 */
             transition: all 0.3s ease-out;
             text-decoration: none;
         }
+
+        .btn-wrapper .button .icon i {
+            font-size: 50px; /* 2倍のサイズに変更 */
+            line-height: 120px; /* 2倍のサイズに変更 */
+            transition: all 0.3s ease-out;
+            text-decoration: none;
+        }
+
+        .btn-wrapper .button span {
+            font-size: 40px; /* 2倍のサイズに変更 */
+            font-weight: 250;
+            line-height: 120px; /* 2倍のサイズに変更 */
+            margin-right: 400px; /* 2倍のサイズに変更 */
+            text-align: center;
+            transition: all 0.3s ease-out;
+            color: #1da1f2;
+            text-decoration: none;
+        }
+        
+        .btn-wrapper .button:hover {
+            width: 300px;  /* ホバー時に幅が広がる */
+            text-decoration: none;
+        }
+
+
         .btn-wrapper .button:hover .icon {
             background: #1da1f2;  /* ホバー時にアイコンの色が反転 */
             text-decoration: none;
         }
-        .btn-wrapper .button .icon i {
-            font-size: 25px;
-            line-height: 60px;
-            transition: all 0.3s ease-out;
-            text-decoration: none;
-        }
+        
         .btn-wrapper .button:hover .icon i {
             color: #fff;
             text-decoration: none;
         }
-        .btn-wrapper .button span {
-            font-size: 20px;
-            font-weight: 500;
-            line-height: 60px;
-            margin-left: 10px;
-            transition: all 0.3s ease-out;
-            color: #1da1f2;
-            text-decoration: none;
-        }
+
+
         .btn-wrapper a {
             text-decoration: none;
+        }
+
+        .btn-wrapper .button .hover-text {
+            position: absolute; /* 絶対位置指定 */
+            left: 30px; /* 左から10pxの位置に設定 */
+            opacity: 0; /* 最初は見えないように設定 */
+            transition: opacity 0.3s; /* ホバー時のアニメーション設定 */
+        }
+
+        .btn-wrapper .button:hover .hover-text {
+            opacity: 1; /* ホバー時に見えるように設定 */
         }
     </style>
 </head>
@@ -141,12 +164,14 @@
     </div>
     <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0N4FgQoqMlmMPikactFwtE" display:block; width=45%; height=70%; frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     <p></p>
+
     <div class="btn-wrapper">
-    <a rel="noopener" href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/html/0225.html&text=🎂 Discovering 02/25 Birthday Color and Music🎂" target="_blank">
-        <div class="button">
-            <div class="icon"><i class="fab fa-twitter"></i></div>  <!-- fontawesome  -->
-            <span text-decoration: none;>Twitter</span>
-        </div>
+        <a rel="noopener" href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/html/0225.html&text=🎂 Discovering 02/25 Birthday Color and Music🎂" target="_blank">
+            <div class="button">
+                <div class="icon"><i class="fab fa-twitter"></i></div>  <!-- fontawesome  -->
+                <span class="hover-text">Twitter</span> <!-- ホバーテキストの追加 -->
+            </a>
+        </div></div>
     </a>
     </div>
     <div class="home-button">
