@@ -28,32 +28,84 @@
             margin: 5px auto;
         }
 
-        .home-button {
-            width: 30%;
-            height: 15%;
-            margin: 5px auto;
-            padding: 10px 20px;
+        /* buttonタグのリセットCSS（不要な場合、セレクタごと削除してください） */
+        button {
+        display:block;
+        padding: 0;
+        appearance: none;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        /* ボタンのスタイル */
+        .buttonIconText02 {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        width: 100%;
+        max-width: 320px;
+        height: 64px;
+        padding: 8px 64px 8px 8px;
+        font-family: sans-serif;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        overflow-wrap: anywhere;
+        background-color: #bb5520;
+        border-radius: 32px; /* (buttonの高さ / 2) の値 */
+        font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin: 0 auto; /* 追加 */
+        }
+
+        .buttonIconText02__reverse {
+        flex-direction: row-reverse;
+        padding: 8px 8px 8px 64px;
+        }
+
+        .buttonIconText02_icon {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        aspect-ratio: 1;
+        overflow: hidden;
+        }
+
+        .buttonIconText02_text {
+        flex-shrink: 1;
+        width: 100%;
+        font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        @media (any-hover: hover) {
+        .buttonIconText02 {
+            transition: background-color 0.2s;
+            font-family: 'Montserrat', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .buttonIconText02_icon {
+            transition: transform 0.2s;
+        }
+
+        .buttonIconText02:hover {
             background-color: #696868;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            display:block;
         }
 
-        /* ボタンにマウスがホバー（上にある）状態のときのスタイルを設定 */
-        .home-button:hover {
-            opacity: 0.7;
-            -webkit-transition: all 0.5s;
-            transition: all 0.5s;
-            -webkit-transform: translate(0, 2px);
-            transform: translate(0, 2px);
-            -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+        .buttonIconText02:hover .buttonIconText02_icon {
+            transform: translateX(4px);
         }
 
-        /* ボタンがアクティブ（クリックされた）状態のときのスタイルを設定 */
-        .home-button:active {
-            opacity: 0.5; /* ボタンの不透明度を半透明に設定 */
+        .buttonIconText02:hover .buttonIconText02_icon__left {
+            transform: translateX(-4px);
+        }
+        }
+
+        /* 左矢印アイコンのスタイル */
+        .iconArrowLeft {
+        rotate: 180deg;
         }
 
         p{
@@ -162,9 +214,17 @@
     <div style="text-align: center;">
     <img src="../pic/after/after_Eagles_Hotel California (2013 Remaster).jpg" alt="Album Jacket Image" style="width: 60%; height: auto;">
     </div>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6gXrEUzibufX9xYPk3HD5p" display:block; width=45%; height=70%; frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <iframe style="border-radius:12px" width="550" height="300" src="https://open.spotify.com/embed/track/6gXrEUzibufX9xYPk3HD5p" display:block; frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     <p></p>
-
+    <div style="text-align: center;">
+    <a href="https://nmocha.github.io/birthday_music/index.html" class="buttonIconText02">
+    <span class="buttonIconText02_icon buttonIconText02_icon__left">
+      <svg class="iconArrowLeft" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="#ffffff" stroke-linecap="round"></path>
+      </svg>
+    </span>
+    <span class="buttonIconText02_text">Home</span>
+    </a></div>
     <div class="btn-wrapper">
         <a rel="noopener" href="http://twitter.com/share?url=https://nmocha.github.io/birthday_music/html/1015.html&text=🎂 Discovering 10/15 Birthday Color and Music🎂" target="_blank">
             <div class="button">
@@ -174,8 +234,6 @@
         </div></div>
     </a>
     </div>
-    <div class="home-button">
-    <a href="https://nmocha.github.io/birthday_music/index.html" class="home-button">Home</a></div>
     <p></p>
     <p></p>
     <script>
